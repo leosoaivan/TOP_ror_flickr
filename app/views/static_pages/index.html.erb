@@ -1,0 +1,20 @@
+<h1>Welcome to your Flickr Feed</h1>
+<p>Search a userID to see that person's activity</p>
+<%= form_tag('/', method: 'get') do %>
+  <%= text_field_tag :userID, params[:userID], placeholder: "Search userID" %>
+  <%= submit_tag "Search", name: nil %>
+<% end %>
+
+<% if params[:userID] %>
+  <%= user_photos(params[:userID]).each do |photo| %>
+    <%= link_to(image_tag(FlickRaw.url_q(photo)), url: FlickRaw.url_photopage(photo)) %>
+  <% end %>
+<% else %>
+  <% flickr.photos.getRecent.each do |photo| %>
+    <% api_connection %>
+    <% info = flickr.photos.getInfo(photo_id: photo.id) %>
+    <%= link_to(
+      image_tag(FlickRaw.url_q(photo)),
+      FlickRaw.url_photopage(info)) %>
+  <% end %>
+<% end %>
