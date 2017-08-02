@@ -17,6 +17,9 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'figaro', '~> 1.1.1'
 gem 'flickraw', '~> 0.9'
+gem 'bootstrap-sass', '~> 3.3'
+gem 'autoprefixer-rails', '~> 7.1'
+gem 'jquery-rails', '~> 4.3'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
