@@ -1,20 +1,56 @@
-<h1>Welcome to your Flickr Feed</h1>
-<p>Search a userID to see that person's activity</p>
-<%= form_tag('/', method: 'get') do %>
-  <%= text_field_tag :userID, params[:userID], placeholder: "Search userID" %>
-  <%= submit_tag "Search", name: nil %>
-<% end %>
+<div class='row'>
+  <div class='col'>
+    <div class='jumbotron text-center'>
+      <h1>Fl*ckr F*ndr</h1>
+      <p> Enter a Flickr userID to get started.</p>
+       <div class='row'> 
+        <div class='col-xs-8 col-xs-offset-2 col-md-6 col-md-offset-3'>
+          <%= form_tag('/', method: 'get') do %>
+            <%= text_field_tag :userID, params[:userID], { placeholder: "Enter a userID", class: 'form-control' } %>
+          <%= submit_tag "Search", { id: 'search-btn', class: 'btn btn-primary btn-block' } %>
+          <% end %>
+        </div>
+       </div> 
+    </div>
+  </div>
+</div>
 
-<% if params[:userID] %>
-  <%= user_photos(params[:userID]).each do |photo| %>
-    <%= link_to(image_tag(FlickRaw.url_q(photo)), url: FlickRaw.url_photopage(photo)) %>
-  <% end %>
-<% else %>
-  <% api_connection %>
-  <% flickr.photos.getRecent.each do |photo| %>
-    <% info = flickr.photos.getInfo(photo_id: photo.id) %>
-    <%= link_to(
-      image_tag(FlickRaw.url_q(photo)),
-      FlickRaw.url_photopage(info)) %>
-  <% end %>
-<% end %>
+<div class='row'>
+  <div class='col'>
+    <% unless params[:userID].blank? %>
+      <% user_photos(params[:userID]).each do |photo| %>
+        <%= link_to(image_tag(FlickRaw.url_q(photo)), url: FlickRaw.url_photopage(photo)) %>
+      <% end %>
+    <% else %>
+      <% if params[:userID].blank? %>
+        <% flash.now[:danger] = 'Sorry, that user wasn\'t found.' %>
+        <div class="row">
+          <div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3">
+            <% flash.each do |message_type, message| %>
+              <div class="alert alert-<%= message_type %> alert-dismissible">
+                <button type='button' class='close fade' data-dismiss='alert'>
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <%= message %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <% begin %>
+        <% api_connection %>
+        <% photos = flickr.photos.getRecent per_page: 50 %>
+        <% photos.each do |photo| %>
+          <% info = flickr.photos.getInfo(photo_id: photo.id) %>
+            <%= link_to(
+              image_tag(FlickRaw.url_q(photo)),
+              FlickRaw.url_photopage(info)) %>
+          <% end %>
+      <% rescue %>
+        <p> Sorry, that photo wasn't found. </p>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<% console %>
