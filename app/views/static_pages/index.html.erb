@@ -9,10 +9,10 @@
             <%= text_field_tag :userID, params[:userID], { placeholder: "Enter a userID", class: 'form-control' } %>
             <div class='row'>
               <div class='col-xs-6'>
-                <%= submit_tag "Search", { class: 'btn btn-primary btn-block index-btn' } %>
+                <%= submit_tag 'Search', { class: 'btn btn-primary btn-block index-btn' } %>
               </div>
               <div class='col-xs-6'>
-                <%= link_to('Home', root_path, class: 'btn btn-warning btn-block index-btn')%>
+                <%= link_to('Clear', root_path, class: 'btn btn-warning btn-block index-btn')%>
               </div>
             </div>
           <% end %>
@@ -24,29 +24,22 @@
 
 <div class='row'>
   <div class='col text-center'>
+    <%= render 'shared/flash' %>
     <% if params[:userID].present? %>
       <% if valid_user?(params[:userID]) %>
         <% user_photos(params[:userID]).each do |photo| %>
           <%= link_to(image_tag(FlickRaw.url_q(photo)), url: FlickRaw.url_photopage(photo)) %>
         <% end %>
       <% else %>
-        <% flash.now[:danger] = 'Sorry, that user wasn\'t found.' %>
-          <%= render 'shared/flash' %>
-        <% photos = recent_photos %>
-        <% photos.each do |photo| %>
-          <%= link_to(image_tag(
-            FlickRaw.url_q(photo), class: 'stream'),
-            FlickRaw.url_photopage(photo_info(photo))) %>
-        <% end %>
+        <% flash.now[:danger] = 'Sorry, that user wasn\'t found. But look at these other photos we found!' %>
+        <%= render 'shared/flash' %>
+        <% @photos = recent_photos %>
+        <%= render 'shared/photo_stream', locals: { photos: @photos } %>
       <% end %>
     <% else %>
       <% api_connection %>
-      <% photos = recent_photos %>
-      <% photos.each do |photo| %>
-        <%= link_to(image_tag(
-            FlickRaw.url_q(photo), class: 'stream'), 
-            FlickRaw.url_photopage(photo_info(photo))) %>
-      <% end %>
+      <% @photos = recent_photos %>
+      <%= render 'shared/photo_stream', locals: { photos: @photos } %>
     <% end %>
   </div>
 </div>

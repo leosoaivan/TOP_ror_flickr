@@ -19,7 +19,7 @@ module FlickrHelper
   end
 
   def recent_photos
-    flickr.photos.getRecent per_page: 10
+    flickr.photos.getRecent per_page: 50
   end
 
   def photo_info(photo)
