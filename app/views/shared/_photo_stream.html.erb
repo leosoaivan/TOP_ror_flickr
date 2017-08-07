@@ -1,5 +1,6 @@
 <% @photos.each do |photo| %>
   <% begin %>
+  <% api_connection %>
     <%= link_to(image_tag(
         FlickRaw.url_q(photo), class: 'stream'), 
         FlickRaw.url_photopage(photo_info(photo))) %>
