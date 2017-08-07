@@ -14,7 +14,9 @@ module FlickrHelper
   end
 
   def recent_photos
-    api_connection 
+    FlickRaw.api_key = Figaro.env.flickr_api_key
+    FlickRaw.shared_secret = Figaro.env.flickr_secret
+    
     flickr.photos.getRecent per_page: 50
   end
   
