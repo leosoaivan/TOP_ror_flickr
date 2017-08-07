@@ -37,7 +37,6 @@
         <%= render 'shared/photo_stream', locals: { photos: @photos } %>
       <% end %>
     <% else %>
-      <% api_connection %>
       <% @photos = recent_photos %>
       <%= render 'shared/photo_stream', locals: { photos: @photos } %>
     <% end %>
