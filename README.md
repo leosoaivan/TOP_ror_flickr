@@ -27,6 +27,7 @@ TO-DO
 
 ## To complete
 1. Fix flash partial to match width of index form.
+2. DRY out `#recent_photos` in index view.
 
 ## Contributing
 1. Fork it!
