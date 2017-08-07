@@ -16,7 +16,7 @@
 </div>
 
 <div class='row'>
-  <div class='col'>
+  <div class='col text-center'>
     <% if params[:userID].present? %>
       <% if valid_user?(params[:userID]) %>
         <% user_photos(params[:userID]).each do |photo| %>
@@ -27,8 +27,8 @@
           <%= render 'shared/flash' %>
         <% photos = recent_photos %>
         <% photos.each do |photo| %>
-          <%= link_to(
-            image_tag(FlickRaw.url_q(photo)),
+          <%= link_to(image_tag(
+            FlickRaw.url_q(photo), class: 'stream'),
             FlickRaw.url_photopage(photo_info(photo))) %>
         <% end %>
       <% end %>
@@ -36,9 +36,9 @@
       <% api_connection %>
       <% photos = recent_photos %>
       <% photos.each do |photo| %>
-        <%= link_to(
-          image_tag(FlickRaw.url_q(photo)),
-          FlickRaw.url_photopage(photo_info(photo))) %>
+        <%= link_to(image_tag(
+            FlickRaw.url_q(photo), class: 'stream'), 
+            FlickRaw.url_photopage(photo_info(photo))) %>
       <% end %>
     <% end %>
   </div>
