@@ -26,7 +26,7 @@ TO-DO
 * [Rspec](http://rspec.info) - Test suite
 
 ## To complete
-TO-DO
+1. Fix flash partial to match width of index form.
 
 ## Contributing
 1. Fork it!
