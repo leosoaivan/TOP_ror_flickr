@@ -1,33 +1,21 @@
-# Flickr Feed
-Flickr Feed is a Rails project that is part of The Odin Project's Rails curriculum. The assignment can be found [here](https://www.theodinproject.com/courses/ruby-on-rails/lessons/apis), listed as Project 2. The project is meant to showcase the use of third-party APIs in Rails production.
+# Flickr Findr
+Flickr Findr is a Rails project that is part of The Odin Project's Rails curriculum. The assignment can be found [here](https://www.theodinproject.com/courses/ruby-on-rails/lessons/apis), listed as Project 2. The project is meant to showcase the use of third-party APIs in Rails production. The front-end was built using Bootstrap, with a focus on mobile-first, responsive development. 
 
 ## Getting Started
-N/A
-
-### Prerequisites
-N/A
-
-### Installing
-N/A
+Nothing to do! Check out the live project on Heroku [here](https://still-spire-50621.herokuapp.com/).
 
 ## Running the tests
-1. Make sure you have RSpec installed
-    
-    `$ gem install rspec`
-2. Run the tests!
-    
-    `$ rspec`
+TO-DO
 
 ## Deployment
 TO-DO
 
 ## Built With
-* [Ruby on Rails](http://rubyonrails.org/) - Web framework
-* [Rspec](http://rspec.info) - Test suite
+* [Ruby on Rails](http://rubyonrails.org/) - MVC web-application framework
+* [Bootstrap](http://getbootstrap.com/) - Front-end framework
 
 ## To complete
 1. Fix flash partial to match width of index form.
-2. DRY out `#recent_photos` in index view.
 
 ## Contributing
 1. Fork it!
